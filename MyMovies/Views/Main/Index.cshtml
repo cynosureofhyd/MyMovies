@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*<script src="~/Scripts/jquery.tmpl.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<script src="~/Scripts/jquery.tmpl.js"></script>
+<script src="~/Scripts/jquery-1.7.js"></script>
+<script id="moviesTmpl" type="text/x-jquery-tmpl">
+    <div class="dcell">
+        @*<img src="${product}.png" />*@
+        <label for="${Movie.Title}">${Movie.Title}:</label>
+        @*<input name="${product}" data-price="${price}" data-stock="${stocklevel}"
+            value="0" required />*@
+    </div>
+</script>
+
+<script id="flowerTmpl" type="text/x-jquery-tmpl">
+    <div class="dcell">
+        <img src="${product}.png" />
+        <label for="${product}">${name}:</label>
+        <input name="${product}" data-price="${price}" data-stock="${stocklevel}"
+               value="0" required />
+    </div>
+</script>
+
+<script type="text/javascript">
+    var imagesInput = {
+        start: 5,
+        end: 10
+    };
+
+    var data = [
+              { name: "Astor", product: "astor", stocklevel: "10", price: 2.99 },
+              { name: "Daffodil", product: "daffodil", stocklevel: "12", price: 1.99 },
+              { name: "Rose", product: "rose", stocklevel: "2", price: 4.99 },
+              { name: "Peony", product: "peony", stocklevel: "0", price: 1.50 },
+              { name: "Primula", product: "primula", stocklevel: "1", price: 3.12 },
+              { name: "Snowdrop", product: "snowdrop", stocklevel: "15", price: 0.99 },
+    ];
+
+    $('#flowerTmpl').tmpl(data).appendTo('#row1');
+
+    $.ajax({
+        type: "POST",
+        url: '/api/Main/GetAllImagesJson',
+        data: JSON.stringify(imagesInput),
+        success: success,
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        //alert(data[0].Movie.Title);
+        var obj = $('#moviesTmpl');
+        obj.tmpl(data).appendTo('#mainId');
+    });
+
+    var success = function (data) {
+        alert("Yeah");
+    };
+</script>
+
+
+<body class="no-touch">
+    <div class="wrap" id="mainId">
+        @*<div data-bind="template: { name: 'movie-template', foreach: products }, starRating: points"></div>*@
+    </div>
+    <!-- /#wrap -->
+    <!-- Add some JavaScript to enable toggling the descriptions when an image is tapped on a touchscreen device -->
+
+    <a id="edit-with-js-bin" href="/aseram/1/edit" style="top: 0px;">Edit in JS Bin <img src="http://static.jsbin.com/images/favicon.png"></a>
+
+
+    <form method="post">
+        <div id="oblock">
+            <div class="dtable">
+                <div id="row1" class="drow"></div>
+                <div id="row2" class="drow"></div>
+            </div>
+        </div>
+        <div id="buttonDiv"><button type="submit">Place Order</button></div>
+    </form>
+</body>
