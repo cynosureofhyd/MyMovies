@@ -1,85 +1,134 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Rate few movies";
 }
 
-<h2>Index</h2>
+<h2>Rate few movies</h2>
 
-@*<script src="~/Scripts/jquery.tmpl.min.js"></script>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<style type="text/css">
+
+    #imagescontainer img {
+        display: inline-block;
+    }
+
+    body {
+        background: url(http://subtlepatterns.com/patterns/scribble_light.png);
+    }
+
+
+    #moviesTmpl {
+        width: 90%;
+        max-width: 1100px;
+        min-width: 800px;
+        margin: 50px auto;
+    }
+
+    #imagescontainer {
+        -webkit-column-count: 3;
+        -webkit-column-gap: 10px;
+        -webkit-column-fill: auto;
+        -moz-column-count: 3;
+        -moz-column-gap: 10px;
+        -moz-column-fill: auto;
+        column-count: 3;
+        column-gap: 15px;
+        column-fill: auto;
+    }
+
+    .pin {
+        display: inline-block;
+        background: #FEFEFE;
+        border: 2px solid #FAFAFA;
+        box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+        margin: 0 2px 15px;
+        -webkit-column-break-inside: avoid;
+        -moz-column-break-inside: avoid;
+        column-break-inside: avoid;
+        padding: 15px;
+        padding-bottom: 5px;
+        background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+        opacity: 1;
+        -webkit-transition: all .2s ease;
+        -moz-transition: all .2s ease;
+        -o-transition: all .2s ease;
+        transition: all .2s ease;
+    }
+
+        .pin img {
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 15px;
+            margin-bottom: 5px;
+        }
+
+        .pin p {
+            font: 12px/18px Arial, sans-serif;
+            color: #333;
+            margin: 0;
+        }
+
+    #imagescontainer:hover .pin:not(:hover) {
+        opacity: 0.4;
+    }
+</style>
+
+<script src="~/Scripts/underscore.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script src="~/Scripts/jquery.tmpl.js"></script>
-<script src="~/Scripts/jquery-1.7.js"></script>
-<script id="moviesTmpl" type="text/x-jquery-tmpl">
-    <div class="dcell">
-        @*<img src="${product}.png" />*@
-        <label for="${Movie.Title}">${Movie.Title}:</label>
-        @*<input name="${product}" data-price="${price}" data-stock="${stocklevel}"
-            value="0" required />*@
+<script src="~/Scripts/masonry.pkgd.min.js"></script>
+<script id="moviesTemplate" type="text/x-jquery-tmpl">
+    <div class="pin">
+        <img src="${Poster.Imdb}" />
     </div>
-</script>
+    @*<label for="${Movie.Title}" >${Movie.Title}:</label>*@
 
-<script id="flowerTmpl" type="text/x-jquery-tmpl">
-    <div class="dcell">
-        <img src="${product}.png" />
-        <label for="${product}">${name}:</label>
-        <input name="${product}" data-price="${price}" data-stock="${stocklevel}"
-               value="0" required />
-    </div>
 </script>
 
 <script type="text/javascript">
-    var imagesInput = {
-        start: 5,
-        end: 10
-    };
+    $(document).ready(function () {
+        var imagesInput = {
+            start: 5,
+            end: 10
+        };
 
-    var data = [
-              { name: "Astor", product: "astor", stocklevel: "10", price: 2.99 },
-              { name: "Daffodil", product: "daffodil", stocklevel: "12", price: 1.99 },
-              { name: "Rose", product: "rose", stocklevel: "2", price: 4.99 },
-              { name: "Peony", product: "peony", stocklevel: "0", price: 1.50 },
-              { name: "Primula", product: "primula", stocklevel: "1", price: 3.12 },
-              { name: "Snowdrop", product: "snowdrop", stocklevel: "15", price: 0.99 },
-    ];
+        $.ajax({
+            type: "POST",
+            url: '/api/Main/GetAllImagesJson',
+            data: JSON.stringify(imagesInput),
+            success: success,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        }).done(function (data) {
+            var obj = $('#moviesTemplate');
+            $('#moviesTemplate').tmpl(data).appendTo('#imagescontainer');
 
-    $('#flowerTmpl').tmpl(data).appendTo('#row1');
+            var container = document.querySelector('#imagescontainer');
+            var msnry = new Masonry(container, {
+                // options
+                columnWidth: 200,
+                itemSelector: '.item'
+            });
 
-    $.ajax({
-        type: "POST",
-        url: '/api/Main/GetAllImagesJson',
-        data: JSON.stringify(imagesInput),
-        success: success,
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    }).done(function (data) {
-        //alert(data[0].Movie.Title);
-        var obj = $('#moviesTmpl');
-        obj.tmpl(data).appendTo('#mainId');
+            //$('#imagescontainer').masonry({
+            //    columnWidth: 200,
+            //    itemSelector: '.item'
+            //});
+        });
+
+
+
+        var success = function (data) {
+            alert("Yeah");
+        };
     });
-
-    var success = function (data) {
-        alert("Yeah");
-    };
 </script>
-
 
 <body class="no-touch">
     <div class="wrap" id="mainId">
         @*<div data-bind="template: { name: 'movie-template', foreach: products }, starRating: points"></div>*@
     </div>
-    <!-- /#wrap -->
-    <!-- Add some JavaScript to enable toggling the descriptions when an image is tapped on a touchscreen device -->
 
-    <a id="edit-with-js-bin" href="/aseram/1/edit" style="top: 0px;">Edit in JS Bin <img src="http://static.jsbin.com/images/favicon.png"></a>
-
-
-    <form method="post">
-        <div id="oblock">
-            <div class="dtable">
-                <div id="row1" class="drow"></div>
-                <div id="row2" class="drow"></div>
-            </div>
-        </div>
-        <div id="buttonDiv"><button type="submit">Place Order</button></div>
-    </form>
+    <div id="imagescontainer" class="masonry">
+        
+    </div>
+       
 </body>
