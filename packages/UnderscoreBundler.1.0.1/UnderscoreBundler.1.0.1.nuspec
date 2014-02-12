@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>UnderscoreBundler</id>
+    <version>1.0.1</version>
+    <title>ASP.NET Underscore.js Templates Bundler</title>
+    <authors>Mike Chaliy</authors>
+    <owners>Mike Chaliy</owners>
+    <licenseUrl>http://www.opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/chaliy/aspnet-underscore-bundler</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ASP.NET compiler and bundler for Undersctore.js templates.</description>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>underscore underscorejs mvc mvc4 bundler</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.0" />
+      <dependency id="underscore.js" version="1.5.1" />
+    </dependencies>
+  </metadata>
+</package>
