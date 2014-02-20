@@ -19,6 +19,8 @@ namespace MyMovies
             this.MoviePersonRoles = new HashSet<MoviePersonRole>();
             this.PosterInfoes = new HashSet<PosterInfo>();
             this.Genres = new HashSet<Genre>();
+            this.Countries = new HashSet<Country>();
+            this.Languages = new HashSet<Language>();
         }
     
         public long ID { get; set; }
@@ -40,5 +42,7 @@ namespace MyMovies
         public virtual ICollection<MoviePersonRole> MoviePersonRoles { get; set; }
         public virtual ICollection<PosterInfo> PosterInfoes { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Country> Countries { get; set; }
+        public virtual ICollection<Language> Languages { get; set; }
     }
 }

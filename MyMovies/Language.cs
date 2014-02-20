@@ -12,9 +12,16 @@ namespace MyMovies
     using System;
     using System.Collections.Generic;
     
-    public partial class MovieCountry
+    public partial class Language
     {
-        public long MovieId { get; set; }
-        public int CountryId { get; set; }
+        public Language()
+        {
+            this.Movies = new HashSet<Movie>();
+        }
+    
+        public int Id { get; set; }
+        public string LanguageName { get; set; }
+    
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

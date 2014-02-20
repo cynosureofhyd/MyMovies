@@ -14,7 +14,14 @@ namespace MyMovies
     
     public partial class Country
     {
+        public Country()
+        {
+            this.Movies = new HashSet<Movie>();
+        }
+    
         public int Id { get; set; }
         public string CountryName { get; set; }
+    
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

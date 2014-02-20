@@ -1,5 +1,4 @@
 ﻿
-<style type="text/css">
     #imagescontainer img {
         display: inline-block;
     }
@@ -59,7 +58,6 @@
             margin: 0;
         }
 
-    #imagescontainer:hover .pin:not(:hover) {
+    /*#imagescontainer:hover .pin:not(:hover) {
         opacity: 0.4;
-    }
-</style>
+    }*/

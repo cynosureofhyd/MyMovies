@@ -11,14 +11,21 @@
 <script src="~/Scripts/masonry.pkgd.min.js"></script>
 <script src="~/Scripts/knockout-3.0.0.js"></script>
 <script src="~/Scripts/App/starRating.js"></script>
+<script src="~/Scripts/knockout-bootstrap.min.js"></script>
 <script id="moviesTemplate" type="text/x-jquery-tmpl">
     <div class="pin">
-        <img src="${Poster.Imdb}" />
+        @*var movieTitle = ${Movie.Title};*@
+        <button class="btn" data-bind="popover: {template: 'popoverTemplate', trigger: 'hover'}">
+            <img src="${Poster.Imdb}" />
+        </button>
         <p>${Movie.Title}</p>
         <div data-bind="starRating: points"></div>
     </div>
-    @*<label for="${Movie.Title}" >${Movie.Title}:</label>*@
+</script>
 
+<script type="text/html" id="popoverTemplate">
+    <button class="close pull-right" type="button" data-dismiss="popover">×</button>
+    ${Movie.PlotSimple}
 </script>
 
 <script type="text/javascript">
@@ -29,7 +36,8 @@
         };
 
         SurveyViewModel = {
-            points : ko.observable(1)
+            eachMovie: ko.observableArray([]),
+            points: ko.observable(1)
         }
 
         $.ajax({
@@ -41,8 +49,16 @@
             contentType: "application/json; charset=utf-8"
         }).done(function (data) {
             var obj = $('#moviesTemplate');
-            $('#moviesTemplate').tmpl(data).appendTo('#imagescontainer');
+            var arrayOfData = new Array();
 
+            $('#moviesTemplate').tmpl(data).appendTo('#imagescontainer');
+            
+
+            $.each(data, function (index, value) {
+                arrayOfData.push(value);
+            });
+
+            SurveyViewModel.eachMovie(arrayOfData);
             var container = document.querySelector('#imagescontainer');
             var msnry = new Masonry(container, {
                 // options
@@ -50,15 +66,8 @@
                 itemSelector: '.item'
             });
 
-            ko.applyBindings(SurveyViewModel,$('#imagescontainer')[0]);
-
-            //$('#imagescontainer').masonry({
-            //    columnWidth: 200,
-            //    itemSelector: '.item'
-            //});
+            ko.applyBindings(SurveyViewModel, $('#imagescontainer')[0]);
         });
-
-
 
         var success = function (data) {
             alert("Yeah");

@@ -21,6 +21,10 @@ namespace MyMovies.ControllersApi
             {
                 MovieEntities db = new MovieEntities();
                 var top100Movies = db.Movies.Take(1000).ToList();
+                //top100Movies = (from movie in db.Movies
+                //               where movie.IMDBRating > 7
+                //               orderby movie.IMDBRating descending
+                //               select db.Movies);
                 var requiredtop100Movies = from d in db.Movies.Take(100)
                                            join poster in db.PosterInfoes on d.ID equals poster.MovieId
                                            select new
