@@ -7,6 +7,7 @@ using System.Web.Http;
 using MyMovies.Models;
 using Newtonsoft.Json;
 using System.Text;
+using System.Web.Script.Serialization;
 
 namespace MyMovies.ControllersApi
 {
@@ -19,12 +20,9 @@ namespace MyMovies.ControllersApi
             HttpResponseMessage message = new HttpResponseMessage();
             try
             {
-                MovieEntities db = new MovieEntities();
-                var top100Movies = db.Movies.Take(1000).ToList();
-                //top100Movies = (from movie in db.Movies
-                //               where movie.IMDBRating > 7
-                //               orderby movie.IMDBRating descending
-                //               select db.Movies);
+                MyMovieEntities db = new MyMovieEntities();
+                var top100Movies = db.Movies.Take(100).ToList();
+                db.Configuration.ProxyCreationEnabled = false;
                 var requiredtop100Movies = from d in db.Movies.Take(100)
                                            join poster in db.PosterInfoes on d.ID equals poster.MovieId
                                            select new
@@ -33,11 +31,11 @@ namespace MyMovies.ControllersApi
                                                PosterInfo = poster
                                            };
 
-                string yourJson1 = JsonConvert.SerializeObject(requiredtop100Movies, Formatting.None,
-                           new JsonSerializerSettings()
-                           {
-                               ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                           });
+                //string yourJson1 = JsonConvert.SerializeObject(requiredtop100Movies, Formatting.None,
+                //           new JsonSerializerSettings()
+                //           {
+                //               ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                //           });
 
                 List<MovieAndPosterInfo> results = new List<MovieAndPosterInfo>();
                 foreach (var requiredMovie in requiredtop100Movies)
@@ -48,6 +46,19 @@ namespace MyMovies.ControllersApi
                         Poster = requiredMovie.PosterInfo
                     });
                 }
+
+                JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+                //string json = jsSerializer.Serialize(results);
+
+
+
+                string temp = JsonConvert.SerializeObject(results.First(), Formatting.None,
+                             new JsonSerializerSettings()
+                             {
+                                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                             });
+
+
                 string yourJson = JsonConvert.SerializeObject(results, Formatting.None,
                             new JsonSerializerSettings()
                             {
@@ -59,14 +70,12 @@ namespace MyMovies.ControllersApi
                 response.Content = new StringContent(yourJson, Encoding.UTF8, "application/json");
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return message;
                 Console.WriteLine(ex.StackTrace);
             }
         }
-
-
 
         //// POST api/<controller>
         //public void Post([FromBody]string value)

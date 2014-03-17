@@ -4,22 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b81221e37d4d48e2ac69b38414bfad01" Name="Diagram1">
-        <EntityTypeShape EntityType="MovieModel.Country" Width="1.875" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieModel.Genre" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieModel.Movie" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieModel.MoviePersonRole" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieModel.Person" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieModel.PosterInfo" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieModel.Role" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <AssociationConnector Association="MovieModel.fk_MoviePersonRole_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="MovieModel.fk_PosterInfo_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="MovieModel.fk_MoviePersonRole_Person" ManuallyRouted="false" />
-        <AssociationConnector Association="MovieModel.fk_MoviePersonRole_Role" ManuallyRouted="false" />
+      <Diagram DiagramId="72cf70cef2cc4662ae086b924452a5ec" Name="Diagram1">
+        <EntityTypeShape EntityType="MovieModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.AspNetRole" Width="1.5" PointX="7.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.AspNetUserClaim" Width="1.5" PointX="12.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.AspNetUserLogin" Width="1.5" PointX="12.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.AspNetUser" Width="1.5" PointX="10" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Country" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Genre" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Language" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Movie" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.MovieLanguage" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.MoviePersonRole" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Person" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.PosterInfo" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.Role" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.User" Width="1.5" PointX="7.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieModel.UserMovieLike" Width="1.5" PointX="9.75" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="MovieModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_MovieLanguage_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_MovieLanguage_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_MoviePersonRole_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_PosterInfo_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_MoviePersonRole_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.FK_MoviePersonRole_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.MovieCountry" ManuallyRouted="false" />
         <AssociationConnector Association="MovieModel.MovieGenre" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MovieModel.Language" Width="1.5" PointX="7.375" PointY="6.875" />
-        <AssociationConnector Association="MovieModel.MovieCountry1" />
-        <AssociationConnector Association="MovieModel.MovieLanguage" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

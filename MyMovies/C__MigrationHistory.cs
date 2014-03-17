@@ -12,14 +12,11 @@ namespace MyMovies
     using System;
     using System.Collections.Generic;
     
-    public partial class MoviePersonRole
+    public partial class C__MigrationHistory
     {
-        public long MovieId { get; set; }
-        public long PersonId { get; set; }
-        public long RoleId { get; set; }
-    
-        public virtual Movie Movie { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual Role Role { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

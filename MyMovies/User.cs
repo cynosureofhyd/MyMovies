@@ -12,14 +12,12 @@ namespace MyMovies
     using System;
     using System.Collections.Generic;
     
-    public partial class MoviePersonRole
+    public partial class User
     {
-        public long MovieId { get; set; }
-        public long PersonId { get; set; }
-        public long RoleId { get; set; }
-    
-        public virtual Movie Movie { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual Role Role { get; set; }
+        public long ID { get; set; }
+        public string username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
     }
 }

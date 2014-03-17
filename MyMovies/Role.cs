@@ -19,7 +19,7 @@ namespace MyMovies
             this.MoviePersonRoles = new HashSet<MoviePersonRole>();
         }
     
-        public int Id { get; set; }
+        public long ID { get; set; }
         public string Description { get; set; }
     
         public virtual ICollection<MoviePersonRole> MoviePersonRoles { get; set; }

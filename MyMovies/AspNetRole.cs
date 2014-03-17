@@ -12,14 +12,16 @@ namespace MyMovies
     using System;
     using System.Collections.Generic;
     
-    public partial class MoviePersonRole
+    public partial class AspNetRole
     {
-        public long MovieId { get; set; }
-        public long PersonId { get; set; }
-        public long RoleId { get; set; }
+        public AspNetRole()
+        {
+            this.AspNetUsers = new HashSet<AspNetUser>();
+        }
     
-        public virtual Movie Movie { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual Role Role { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

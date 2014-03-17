@@ -13,10 +13,10 @@ namespace MyMovies
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MovieEntities : DbContext
+    public partial class MyMovieEntities : DbContext
     {
-        public MovieEntities()
-            : base("name=MovieEntities")
+        public MyMovieEntities()
+            : base("name=MyMovieEntities")
         {
         }
     
@@ -25,13 +25,21 @@ namespace MyMovies
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<MovieLanguage> MovieLanguages { get; set; }
         public virtual DbSet<MoviePersonRole> MoviePersonRoles { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<PosterInfo> PosterInfoes { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserMovieLike> UserMovieLikes { get; set; }
     }
 }
