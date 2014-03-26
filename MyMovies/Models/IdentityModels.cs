@@ -10,7 +10,7 @@ namespace MyMovies.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("MyMovies")
+            : base("MyMovie")
         {
         }
     }
